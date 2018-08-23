@@ -14,9 +14,16 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 });
 
+Route::post('login', 'UserController@login');
+Route::post('logout', 'UserController@logout');
+Route::post('register', 'UserController@register');
+
 Route::group(['middleware' => 'jwt.auth'],function(){  
-    //tus rutas seguras
+	//tus rutas 
+	Route::get('/users', function() {
+		return response()->json('aquí irán los usuarios.');
+	});
 });
